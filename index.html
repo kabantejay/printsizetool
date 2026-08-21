@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Print Image at Exact Size - Split Across Multiple Pages to PDF</title>
+  <meta name="description" content="Free browser-based tool to print any image at an exact size. Split large images, craft patterns, posters and templates across A4, US Letter and other paper sizes, then download a tiled PDF.">
+  <meta name="keywords" content="print image actual size, split image across multiple pages, tile image to PDF, print large image on A4, poster PDF maker, pattern enlarger, printable template maker, image to multipage PDF">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#f5f5f2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Print Image at Exact Size - Tiled PDF Maker">
+  <meta property="og:description" content="Resize an image to exact real-world dimensions and split it across printable PDF pages. Everything runs locally in your browser.">
+  <meta property="og:image" content="social-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Exact Size Tiled PDF Maker",
+    "applicationCategory":"DesignApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires JavaScript and a modern browser",
+    "description":"Resize an image to exact physical dimensions and split it across multiple printable PDF pages.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "featureList":["Exact-size image printing","Multi-page tiled PDF export","A4 and US Letter support","Overlap and crop marks","Mirror image for transfer patterns","Local browser processing"]
+  }
+  </script>
+  <style>
+    :root{--bg:#f5f5f2;--panel:#fff;--ink:#20211f;--muted:#686b66;--line:#dedfd9;--accent:#315f55;--accent2:#e7f0ed;--danger:#a04438;--shadow:0 16px 44px rgba(27,35,31,.08);--radius:16px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--accent)}
+    .wrap{width:min(1380px,calc(100% - 28px));margin:auto}.topbar{padding:14px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:760;letter-spacing:-.02em}.brand-mark{width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:grid;place-items:center;box-shadow:0 5px 16px rgba(0,0,0,.04)}.privacy{font-size:12px;color:var(--muted)}
+    .hero{text-align:center;padding:20px 0 22px}.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.03;letter-spacing:-.048em;margin:0 auto 10px;max-width:850px}.hero p{font-size:clamp(14px,1.5vw,17px);color:var(--muted);max-width:760px;margin:0 auto}.badge{display:inline-flex;background:var(--accent2);color:var(--accent);border-radius:999px;padding:6px 10px;font-weight:750;font-size:10px;margin-bottom:10px}
+    .app{display:grid;grid-template-columns:500px minmax(0,1fr);gap:16px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.controls{padding:16px;position:sticky;top:10px}.preview-panel{padding:16px;overflow:hidden}
+    .upload-row{display:flex;align-items:center;gap:11px;border:1px dashed #bcc4bd;border-radius:12px;padding:10px 11px;background:#fafaf8;margin-bottom:14px;transition:.18s}.upload-row.drag{border-color:var(--accent);background:var(--accent2)}.upload-info{min-width:0;flex:1}.upload-info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.upload-info small{display:block;color:var(--muted);font-size:11px}.upload-row button,.empty button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 11px;font-weight:750;white-space:nowrap}.upload-row input{display:none}
+    .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.section{min-width:0}.section-title{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800;margin-bottom:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field{margin-bottom:8px}.field label{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;margin-bottom:4px}.field small{color:var(--muted);font-weight:500}.input-wrap{display:flex;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden}.input-wrap input{width:100%;border:0;padding:8px 9px;outline:none;min-width:0}.input-wrap span{padding:8px;color:var(--muted);background:#f7f7f4;border-left:1px solid var(--line)}select{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 9px;background:#fff;outline:none}.check{display:flex;align-items:flex-start;gap:7px;margin:7px 0;color:#333;font-size:12px}.check input{accent-color:var(--accent);width:15px;height:15px;margin-top:1px;flex:0 0 auto}
+    .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#f1f2ee;border-radius:10px;padding:3px;margin-bottom:8px}.seg button{border:0;background:transparent;border-radius:7px;padding:6px 4px;font-weight:700;color:var(--muted);font-size:12px}.seg button.active{background:#fff;color:var(--ink);box-shadow:0 1px 5px rgba(0,0,0,.08)}
+    .label-warning{display:none;color:var(--danger);font-size:11px;line-height:1.35;margin:5px 0 0 22px}.label-warning.show{display:block}.bottom-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}.summary{background:#f7f8f5;border:1px solid var(--line);border-radius:12px;padding:10px;margin:0}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.summary b{display:block;font-size:15px}.summary span{font-size:10px;color:var(--muted)}.warning{display:none;color:var(--danger);font-size:11px;margin-top:7px}.warning.show{display:block}.actions{display:flex;flex-direction:column;justify-content:center}.primary{width:100%;border:0;border-radius:11px;background:var(--accent);color:white;padding:11px 13px;font-weight:800;box-shadow:0 8px 20px rgba(49,95,85,.19)}.primary:disabled{opacity:.5;cursor:not-allowed}.secondary{width:100%;margin-top:7px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px;font-weight:750;font-size:12px}.status{font-size:11px;color:var(--muted);text-align:center;margin-top:6px;min-height:15px}
+    .preview-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:10px}.preview-head h2{margin:0;font-size:19px}.preview-head p{margin:1px 0 0;color:var(--muted);font-size:12px}.zoom{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}.zoom input{width:90px;accent-color:var(--accent)}
+    .stage{height:590px;border-radius:13px;border:1px solid var(--line);background-color:#eceeea;background-image:linear-gradient(45deg,#e3e5e1 25%,transparent 25%),linear-gradient(-45deg,#e3e5e1 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e3e5e1 75%),linear-gradient(-45deg,transparent 75%,#e3e5e1 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:24px}.canvas-wrap{position:relative;flex:0 0 auto}.canvas-wrap canvas{display:block;background:#fff;box-shadow:0 10px 28px rgba(0,0,0,.15)}.empty{height:100%;width:100%;display:grid;place-items:center;text-align:center;color:var(--muted);padding:30px;cursor:pointer}.empty svg{display:block;margin:0 auto 10px;opacity:.55}.empty strong{display:block;color:var(--ink);margin-bottom:4px}.empty button{margin-top:12px}.page-legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:9px}.dot{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}.dot.cut{border:2px solid #315f55}.dot.overlap{background:rgba(49,95,85,.18)}
+    .drop-overlay{position:fixed;inset:0;z-index:9999;background:rgba(245,245,242,.92);backdrop-filter:blur(5px);display:none;place-items:center;padding:24px}.drop-overlay.show{display:grid}.drop-overlay-box{width:min(560px,100%);border:3px dashed var(--accent);border-radius:24px;background:#fff;padding:54px 25px;text-align:center;box-shadow:var(--shadow)}.drop-overlay-box strong{display:block;font-size:24px;margin-bottom:6px}.drop-overlay-box span{color:var(--muted)}
+    .content{padding:56px 0 44px}.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px}.content h2{font-size:30px;letter-spacing:-.035em;line-height:1.15;margin:0 0 16px}.content h3{font-size:18px;margin:28px 0 8px}.content p,.content li{color:var(--muted)}.content ol,.content ul{padding-left:20px}.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:9px}.faq summary{font-weight:750;cursor:pointer}.faq p{margin-bottom:2px}.footer{padding:25px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:1080px){.app{grid-template-columns:440px minmax(0,1fr)}.stage{height:540px}}@media(max-width:900px){.app{grid-template-columns:1fr}.controls{position:static}.preview-panel{min-height:auto}.stage{height:520px}.content-grid{grid-template-columns:1fr}.privacy{display:none}}@media(max-width:560px){.wrap{width:min(100% - 18px,1380px)}.hero{padding-top:16px}.controls,.preview-panel{padding:12px}.settings-grid,.bottom-grid{grid-template-columns:1fr}.stage{height:430px;padding:14px}.topbar{padding-top:10px}}
+  </style>
+</head>
+<body>
+  <div class="drop-overlay" id="dropOverlay"><div class="drop-overlay-box"><strong>Drop image to open</strong><span>The file stays in your browser and is never uploaded.</span></div></div>
+  <header class="wrap topbar">
+    <div class="brand"><span class="brand-mark">▦</span><span>Exact Size PDF</span></div>
+    <div class="privacy">Private by design - your image never leaves this browser</div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div class="badge">FREE · NO UPLOAD · WORKS IN YOUR BROWSER</div>
+      <h1>Print any image at an exact real-world size</h1>
+      <p>Turn artwork, patterns, templates or posters into a tiled PDF that prints across ordinary sheets of paper and assembles at the size you choose.</p>
+    </section>
+
+    <section class="wrap app" aria-label="Exact size tiled PDF maker">
+      <aside class="panel controls">
+        <div class="upload-row" id="dropZone">
+          <div class="upload-info"><strong id="fileName">No image selected</strong><small>Drag an image anywhere or browse · PNG, JPG, WebP, SVG, GIF</small></div>
+          <button type="button" id="browseBtn">Choose image</button>
+          <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/gif">
+        </div>
+
+        <div class="settings-grid">
+          <div class="section">
+            <div class="section-title">1. Finished size</div>
+            <div class="seg" id="unitSeg"><button data-unit="cm" class="active">cm</button><button data-unit="in">inches</button><button data-unit="mm">mm</button></div>
+            <div class="row">
+              <div class="field"><label for="designW">Width</label><div class="input-wrap"><input id="designW" type="number" min="1" step="0.1" value="40"><span class="unit-label">cm</span></div></div>
+              <div class="field"><label for="designH">Height</label><div class="input-wrap"><input id="designH" type="number" min="1" step="0.1" value="40"><span class="unit-label">cm</span></div></div>
+            </div>
+            <label class="check"><input type="checkbox" id="lockRatio" checked> Keep image proportions</label>
+            <label class="check"><input type="checkbox" id="mirrorImage"> Mirror horizontally for transfer</label>
+          </div>
+
+          <div class="section">
+            <div class="section-title">2. Paper and assembly</div>
+            <div class="field"><label for="paperSize">Paper size</label><select id="paperSize"><option value="letter" selected>US Letter · 8.5 × 11 in</option><option value="a4">A4 · 210 × 297 mm</option><option value="legal">US Legal · 8.5 × 14 in</option><option value="tabloid">Tabloid · 11 × 17 in</option><option value="a3">A3 · 297 × 420 mm</option></select></div>
+            <div class="field"><label for="orientation">Orientation</label><select id="orientation"><option value="auto" selected>Auto · use fewer pages</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+            <div class="row">
+              <div class="field"><label for="margin">Margin <small>mm</small></label><div class="input-wrap"><input id="margin" type="number" min="0" max="25" step="1" value="5"><span>mm</span></div></div>
+              <div class="field"><label for="overlap">Overlap <small>mm</small></label><div class="input-wrap"><input id="overlap" type="number" min="0" max="30" step="1" value="5"><span>mm</span></div></div>
+            </div>
+            <label class="check"><input type="checkbox" id="cropMarks" checked> Add trim and alignment marks</label>
+            <label class="check"><input type="checkbox" id="pageLabels" checked> Add page numbers and labels</label>
+            <div class="label-warning" id="labelWarning">Page labels need at least a 5 mm margin. They will be omitted from the PDF at the current margin.</div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="summary">
+            <div class="summary-grid"><div><b id="pageCount">-</b><span>PDF pages</span></div><div><b id="gridCount">-</b><span>page grid</span></div><div><b id="finalSize">40 × 40 cm</b><span>finished size</span></div><div><b id="dpiValue">-</b><span>effective DPI</span></div></div>
+            <div class="warning" id="dpiWarning">The source image may look soft at this size. For crisp line art, aim for at least 150 DPI.</div>
+          </div>
+          <div class="actions">
+            <button class="primary" id="downloadBtn" disabled>Download tiled PDF</button>
+            <button class="secondary" id="demoBtn">Load sample artwork</button>
+            <div class="status" id="status"></div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel preview-panel">
+        <div class="preview-head"><div><h2>Print layout preview</h2><p>Page edges and repeated overlap update automatically.</p></div><label class="zoom">Zoom <input id="zoom" type="range" min="50" max="160" value="100"></label></div>
+        <div class="stage" id="stage"><div class="empty" id="emptyState"><div><svg width="68" height="68" viewBox="0 0 72 72" fill="none"><rect x="12" y="8" width="42" height="52" rx="3" stroke="currentColor" stroke-width="2"/><path d="M23 25h20M23 33h20M23 41h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 14h42v48H20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/></svg><strong>Drop an image here</strong><div>Or choose a file to build the printable layout.</div><button type="button" id="emptyBrowseBtn">Choose image</button></div></div><div class="canvas-wrap" id="canvasWrap" hidden><canvas id="previewCanvas"></canvas></div></div>
+        <div class="page-legend"><span><i class="dot cut"></i>Page boundary</span><span><i class="dot overlap"></i>Repeated overlap area</span></div>
+      </section>
+    </section>
+
+    <section class="wrap content">
+      <div class="content-grid">
+        <article>
+          <h2>Large-format printing from a regular home printer</h2>
+          <p>This tool creates a multi-page or “tiled” PDF. Your image is scaled to an exact physical width and height, divided into printable sections, and placed on standard sheets such as US Letter, A4, Legal, Tabloid or A3.</p>
+          <h3>How to print and assemble your PDF</h3>
+          <ol><li>Upload your image and enter its desired finished size.</li><li>Choose the paper loaded in your printer.</li><li>Download the PDF and print at <strong>100% / Actual size</strong>. Do not use “Fit to page”.</li><li>Trim one side of each overlap, align the matching marks, then tape the sheets together.</li></ol>
+          <h3>Useful for more than posters</h3>
+          <p>Resize sewing patterns, punch needle templates, rug tufting designs, embroidery transfers, woodworking plans, classroom graphics, stencils, signs, wall art and other full-size templates.</p>
+        </article>
+        <article class="faq">
+          <h2>Frequently asked questions</h2>
+          <details open><summary>Does the image get uploaded?</summary><p>No. Image processing and PDF generation happen locally in your browser.</p></details>
+          <details><summary>How do I make a 40 × 40 cm pattern?</summary><p>Select centimeters, enter 40 for width and 40 for height, choose your paper size, then download and print the PDF at Actual size or 100% scale.</p></details>
+          <details><summary>Why is overlap useful?</summary><p>Overlap repeats a narrow strip of the design on neighboring sheets. It makes alignment easier and leaves room for trimming and taping.</p></details>
+          <details><summary>Should I mirror a craft pattern?</summary><p>Mirror the image when your transfer method reverses the design, such as tracing from the back or using certain transfer papers. Leave it off when orientation does not matter.</p></details>
+          <details><summary>What resolution do I need?</summary><p>Line art often works well around 150 DPI at final size. Detailed artwork may benefit from 200-300 DPI. The tool displays the effective DPI of your uploaded file.</p></details>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span>Exact Size PDF - free tiled printing utility</span><span>For accurate output, always print at 100% / Actual size.</span></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js" crossorigin="anonymous"></script>
+  <script>
+  (()=>{
+    const $=id=>document.getElementById(id), els={fileInput:$('fileInput'),browseBtn:$('browseBtn'),dropZone:$('dropZone'),fileName:$('fileName'),designW:$('designW'),designH:$('designH'),lockRatio:$('lockRatio'),mirrorImage:$('mirrorImage'),paperSize:$('paperSize'),orientation:$('orientation'),margin:$('margin'),overlap:$('overlap'),cropMarks:$('cropMarks'),pageLabels:$('pageLabels'),pageCount:$('pageCount'),gridCount:$('gridCount'),finalSize:$('finalSize'),dpiValue:$('dpiValue'),dpiWarning:$('dpiWarning'),downloadBtn:$('downloadBtn'),demoBtn:$('demoBtn'),status:$('status'),emptyState:$('emptyState'),emptyBrowseBtn:$('emptyBrowseBtn'),canvasWrap:$('canvasWrap'),canvas:$('previewCanvas'),stage:$('stage'),zoom:$('zoom'),unitSeg:$('unitSeg'),labelWarning:$('labelWarning'),dropOverlay:$('dropOverlay')};
+    const papers={letter:[215.9,279.4],a4:[210,297],legal:[215.9,355.6],tabloid:[279.4,431.8],a3:[297,420]};
+    let image=null,imageName='pattern',unit='cm',aspect=1,lastEdited='w',layout=null;
+    const toMM=v=>unit==='cm'?v*10:unit==='in'?v*25.4:v, fromMM=v=>unit==='cm'?v/10:unit==='in'?v/25.4:v;
+    const fmt=v=>Number(v).toLocaleString(undefined,{maximumFractionDigits:1});
+    function setStatus(t){els.status.textContent=t||''}
+    function calcForOrientation(o){let [pw,ph]=papers[els.paperSize.value];if(o==='landscape')[pw,ph]=[ph,pw];const m=Math.max(0,+els.margin.value||0),ov=Math.max(0,+els.overlap.value||0),uw=pw-2*m,uh=ph-2*m,sw=Math.max(1,uw-ov),sh=Math.max(1,uh-ov),dw=toMM(+els.designW.value||1),dh=toMM(+els.designH.value||1),cols=Math.max(1,Math.ceil(Math.max(0,dw-ov)/sw)),rows=Math.max(1,Math.ceil(Math.max(0,dh-ov)/sh));return{orientation:o,pw,ph,m,ov,uw,uh,sw,sh,dw,dh,cols,rows,pages:cols*rows}}
+    function getLayout(){const choice=els.orientation.value;if(choice!=='auto')return calcForOrientation(choice);const p=calcForOrientation('portrait'),l=calcForOrientation('landscape');return l.pages<p.pages?l:p}
+    function updateSize(changed){if(!image||!els.lockRatio.checked)return;lastEdited=changed;if(changed==='w')els.designH.value=(+els.designW.value/aspect).toFixed(1);else els.designW.value=(+els.designH.value*aspect).toFixed(1)}
+    function render(){layout=getLayout();const L=layout;els.pageCount.textContent=L.pages;els.gridCount.textContent=`${L.cols} × ${L.rows}`;els.finalSize.textContent=`${fmt(fromMM(L.dw))} × ${fmt(fromMM(L.dh))} ${unit}`;els.labelWarning.classList.toggle('show',els.pageLabels.checked&&L.m<5);
+      if(image){const dpi=Math.min(image.naturalWidth/(L.dw/25.4),image.naturalHeight/(L.dh/25.4));els.dpiValue.textContent=Math.round(dpi);els.dpiWarning.classList.toggle('show',dpi<150);els.downloadBtn.disabled=false;drawPreview()}else{els.dpiValue.textContent='-';els.downloadBtn.disabled=true}
+    }
+    function drawPreview(){if(!image)return;els.emptyState.hidden=true;els.canvasWrap.hidden=false;const L=layout,z=(+els.zoom.value||100)/100,availableW=Math.max(180,els.stage.clientWidth-48),availableH=Math.max(180,els.stage.clientHeight-48),baseScale=Math.min(availableW/L.dw,availableH/L.dh,2.2),scale=baseScale*z,cw=Math.max(100,Math.round(L.dw*scale)),ch=Math.max(100,Math.round(L.dh*scale)),dpr=Math.min(2,window.devicePixelRatio||1);els.canvas.width=Math.round(cw*dpr);els.canvas.height=Math.round(ch*dpr);els.canvas.style.width=cw+'px';els.canvas.style.height=ch+'px';const c=els.canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,cw,ch);c.save();if(els.mirrorImage.checked){c.translate(cw,0);c.scale(-1,1)}c.drawImage(image,0,0,cw,ch);c.restore();c.strokeStyle='rgba(49,95,85,.95)';c.lineWidth=1.25;c.fillStyle='rgba(49,95,85,.13)';c.font='600 11px system-ui';
+      for(let r=0;r<L.rows;r++)for(let col=0;col<L.cols;col++){const x=col*L.sw*scale,y=r*L.sh*scale,w=Math.min(L.uw,L.dw-col*L.sw)*scale,h=Math.min(L.uh,L.dh-r*L.sh)*scale;if(col>0&&L.ov>0)c.fillRect(x,y,L.ov*scale,h);if(r>0&&L.ov>0)c.fillRect(x,y,w,L.ov*scale);c.strokeRect(x+.5,y+.5,w-1,h-1);const tagW=28,tagH=15;c.fillStyle='rgba(255,255,255,.88)';c.fillRect(x+4,y+4,tagW,tagH);c.fillStyle='#315f55';c.fillText(`${String.fromCharCode(65+r)}${col+1}`,x+8,y+15);c.fillStyle='rgba(49,95,85,.13)'}
+    }
+    function loadImage(src,name){const img=new Image();img.onload=()=>{image=img;imageName=(name||'pattern').replace(/\.[^.]+$/,'').replace(/[^a-z0-9_-]+/gi,'-');aspect=img.naturalWidth/img.naturalHeight;if(els.lockRatio.checked)els.designH.value=(+els.designW.value/aspect).toFixed(1);els.fileName.textContent=name||'Sample artwork';setStatus(`${img.naturalWidth} × ${img.naturalHeight} px loaded`);render()};img.onerror=()=>setStatus('Could not read this image.');img.src=src}
+    function handleFile(file){if(!file||!file.type.startsWith('image/')){setStatus('Please choose an image file.');return}const reader=new FileReader();reader.onload=e=>loadImage(e.target.result,file.name);reader.readAsDataURL(file)}
+    function makeSample(){const c=document.createElement('canvas');c.width=c.height=1200;const x=c.getContext('2d');x.fillStyle='#f8e8d5';x.fillRect(0,0,1200,1200);x.fillStyle='#315f55';x.beginPath();x.arc(600,600,370,0,Math.PI*2);x.fill();x.fillStyle='#f2b36d';for(let i=0;i<12;i++){x.save();x.translate(600,600);x.rotate(i*Math.PI/6);x.beginPath();x.ellipse(0,-265,55,130,0,0,Math.PI*2);x.fill();x.restore()}x.fillStyle='#f8e8d5';x.beginPath();x.arc(600,600,170,0,Math.PI*2);x.fill();x.fillStyle='#b65f4b';x.beginPath();x.arc(600,600,90,0,Math.PI*2);x.fill();loadImage(c.toDataURL('image/png'),'sample-pattern.png')}
+    function cropCanvas(sx,sy,sw,sh,outW,outH){const c=document.createElement('canvas');c.width=Math.max(1,Math.round(outW));c.height=Math.max(1,Math.round(outH));const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.save();if(els.mirrorImage.checked){x.translate(c.width,0);x.scale(-1,1);x.drawImage(image,image.naturalWidth-(sx+sw),sy,sw,sh,0,0,c.width,c.height)}else x.drawImage(image,sx,sy,sw,sh,0,0,c.width,c.height);x.restore();return c}
+    async function downloadPDF(){if(!image)return;if(!window.jspdf){setStatus('PDF library did not load. Check your internet connection.');return}els.downloadBtn.disabled=true;els.downloadBtn.textContent='Building PDF…';setStatus('Preparing printable pages locally…');await new Promise(r=>setTimeout(r,30));try{const {jsPDF}=window.jspdf,L=getLayout(),pdf=new jsPDF({orientation:L.orientation,unit:'mm',format:[L.pw,L.ph],compress:true,putOnlyUsedFonts:true});const pxPerMMx=image.naturalWidth/L.dw,pxPerMMy=image.naturalHeight/L.dh;let page=0;
+        for(let r=0;r<L.rows;r++)for(let col=0;col<L.cols;col++){if(page++)pdf.addPage([L.pw,L.ph],L.orientation);const xMM=col*L.sw,yMM=r*L.sh,tileW=Math.min(L.uw,L.dw-xMM),tileH=Math.min(L.uh,L.dh-yMM),sx=xMM*pxPerMMx,sy=yMM*pxPerMMy,sw=tileW*pxPerMMx,sh=tileH*pxPerMMy,maxRaster=3200,ratio=Math.min(1,maxRaster/Math.max(sw,sh)),tile=cropCanvas(sx,sy,sw,sh,sw*ratio,sh*ratio);pdf.addImage(tile,'JPEG',L.m,L.m,tileW,tileH,undefined,'FAST');pdf.setDrawColor(70,70,70);pdf.setLineWidth(.18);
+          if(els.cropMarks.checked){const a=4,g=1.5,rx=L.m+tileW,by=L.m+tileH;[[L.m,L.m], [rx,L.m], [L.m,by], [rx,by]].forEach(([x,y],i)=>{const left=i===0||i===2,top=i<2;pdf.line(x+(left?-g:g),y,x+(left?-a:a),y);pdf.line(x,y+(top?-g:g),x,y+(top?-a:a))});if(col>0){pdf.line(L.m,L.m,L.m,L.m+tileH)}if(r>0){pdf.line(L.m,L.m,L.m+tileW,L.m)}}
+          if(els.pageLabels.checked&&L.m>=5){pdf.setFont('helvetica','normal');pdf.setFontSize(6.8);pdf.setTextColor(75);const label=`Page ${page} of ${L.pages} · ${String.fromCharCode(65+r)}${col+1} · Print at 100% / Actual size`;pdf.text(label,L.pw/2,L.ph-2.2,{align:'center'})}
+        }
+        pdf.setProperties({title:`${imageName} - exact size tiled print`,subject:`${fmt(fromMM(L.dw))} × ${fmt(fromMM(L.dh))} ${unit} tiled print`,creator:'Exact Size PDF'});pdf.save(`${imageName}-${fmt(fromMM(L.dw))}x${fmt(fromMM(L.dh))}${unit}-tiled.pdf`);setStatus(`PDF created: ${L.pages} pages. Print at 100% / Actual size.`)
+      }catch(err){console.error(err);setStatus('PDF creation failed. Try a smaller image or refresh the page.')}finally{els.downloadBtn.disabled=false;els.downloadBtn.textContent='Download tiled PDF'}
+    }
+    const openPicker=()=>els.fileInput.click();els.browseBtn.onclick=openPicker;els.emptyBrowseBtn.onclick=e=>{e.stopPropagation();openPicker()};els.emptyState.onclick=openPicker;els.fileInput.onchange=e=>handleFile(e.target.files[0]);
+    let dragDepth=0;document.addEventListener('dragenter',e=>{e.preventDefault();dragDepth++;els.dropOverlay.classList.add('show')});document.addEventListener('dragover',e=>{e.preventDefault()});document.addEventListener('dragleave',e=>{e.preventDefault();dragDepth=Math.max(0,dragDepth-1);if(!dragDepth)els.dropOverlay.classList.remove('show')});document.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;els.dropOverlay.classList.remove('show');handleFile(e.dataTransfer.files[0])});
+    els.unitSeg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const old=unit,newU=b.dataset.unit,wMM=toMM(+els.designW.value),hMM=toMM(+els.designH.value);unit=newU;[...els.unitSeg.children].forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.unit-label').forEach(x=>x.textContent=unit);els.designW.value=fromMM(wMM).toFixed(unit==='mm'?0:1);els.designH.value=fromMM(hMM).toFixed(unit==='mm'?0:1);render()});
+    els.designW.addEventListener('input',()=>{updateSize('w');render()});els.designH.addEventListener('input',()=>{updateSize('h');render()});['change','input'].forEach(ev=>[els.paperSize,els.orientation,els.margin,els.overlap,els.cropMarks,els.pageLabels,els.mirrorImage,els.lockRatio].forEach(x=>x.addEventListener(ev,render)));els.zoom.oninput=drawPreview;els.demoBtn.onclick=makeSample;els.downloadBtn.onclick=downloadPDF;let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(image)drawPreview()},120)});render();
+  })();
+  </script>
+</body>
+</html>
