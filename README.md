@@ -1,7 +1,7 @@
 # PrintSizeTool
 Print Image at Exact Size - Split Across Multiple Pages to PDF
 
-WebSite: [https:kabantejay.github.io/printsizetool/](PrintSizeTool)
+WebSite: [PrintSizeTool](https:kabantejay.github.io/printsizetool/)
 
 EXACT SIZE TILED PDF MAKER
 ==========================
